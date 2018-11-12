@@ -158,7 +158,8 @@ Examples:
 *	list
 *	Displays list of all persons
 
-
+// tag::find[]
+[[find]]
 === Find a person by NRIC : `find` (HQP & PO)
 
 Finds a person in the Police Records by the specified NRIC
@@ -175,7 +176,8 @@ Examples:
 ====
 *   A timestamp and current ID is stored whenever this command is used
 ====
-
+// tag::check[]
+[[check]]
 === Get screening history of a person: `check` (HQP)
 
 Displays all the times a person was screened in the form of timestamps (using 'find' command) - Only by HQP
@@ -189,7 +191,7 @@ Examples:
 
 *	check s1234567a
 *	Shows an indexed list of timestamps for when person with s1234567a was screened by any POs
-
+// end::check[]
 
 === Get status of POs: `checkstatus` (HQP & PO)
 

@@ -1608,7 +1608,7 @@ Use case resumes at step 4.
 ** 5d1.  System shows an error message stating that backup & requester is same officer.
 +
 Use Case resumes at step 4.
-// end:dispatch[]
+// end::dispatch[]
 
 
 [appendix]

@@ -1,7 +1,5 @@
 = Muhammad Harun - Project Portfolio
 :site-section: ProjectPortfolio
-:toc:
-:toc-title:
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 :xrefstyle: full
@@ -65,10 +63,6 @@ The PRISM is an adaptation of the already existing Address-Book 3 (AB3) program 
 include::../UserGuide.adoc[tag=find]
 
 include::../UserGuide.adoc[tag=check]
-
-include::../UserGuide.adoc[tag=updatestatus]
-
-include::../UserGuide.adoc[tag=checkstatus]
 
 
 == Contributions to the Developer Guide
