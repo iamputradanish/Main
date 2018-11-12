@@ -533,11 +533,10 @@ Step 8: CommandResult with successful message is returned to Logic class, which 
 
 * **Alternatives: ** Similar considerations as rb command.
 
-// end::dispatch[]
-
 * Alternatives considered: Chat Client API
 ** Pros: Allows real time system with remote access so police officers can view in real time
 ** Cons: Chat Client does not store messages after closing application (data does not persist), not much API documentation for beginners
+// end::dispatch[]
 
 // tag::updatestatus[]
 [[updatestatus]]

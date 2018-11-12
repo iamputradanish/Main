@@ -43,7 +43,7 @@ The ability to lock anytime also helps to increase security in times of emergenc
 === Other Contributions:
 
 ** Project management:
-*** Managed project pre-releases `v1.1` - `v1.2` and project release 'v1.3-1.4' on GitHub
+*** Managed project pre-releases `v1.1` - `v1.2` and project release `v1.3`-`1.4` on GitHub
 *** Managed all versions of product, and disseminated almost all issues to team members
 ** Enhancements to existing features:
 *** Updated the GUI color scheme and background image (Pull requests https://github.com/CS2113-AY1819S1-F10-3/main/pull/98[#98])

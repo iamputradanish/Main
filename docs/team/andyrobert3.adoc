@@ -1,8 +1,8 @@
 = Matthew Alexander - Project Portfolio
-
 :site-section: ProjectPortfolio
 :toc:
 :toc-title:
+:sectnums:
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 :xrefstyle: full
@@ -11,7 +11,6 @@
 :note-caption: :information_source:
 :warning-caption: :warning:
 :experimental:
-
 == PROJECT: Police Records Intelligent System (PRISM)
 
 ---
@@ -32,43 +31,43 @@ POs can also request for backup when needed, HQP would dispatch other POs at the
 Refer to Quick Start guide to get started.
 
 == Summary
-* *Role*: Developer
-* *Responsibility*: Integration
-* *Major enhancements*:
-** *Edit Command*
-*** What it does: Allows HQP to update selected parameters such as a civilian’s postal code, offense list, wanted for and wanted status.
-*** Justification: : Individual data in Police Records System would need to be updated as people change addresses, commit crimes, serve their sentence.
-*** Highlights: Due to each NRIC being assigned to a specific individual for their whole lives, they cannot be changed.
+* Role: Developer
+* Responsibility: Integration
+* Major enhancements:
+* *Edit Command
+* What it does: Allows HQP to update selected parameters such as a civilian’s postal code, offense list, wanted for and wanted status.
+* Justification: : Individual data in Police Records System would need to be updated as people change addresses, commit crimes, serve their sentence.
+* Highlights: Due to each NRIC being assigned to a specific individual for their whole lives, they cannot be changed.
 
-** *Request Command*
-*** What it does: Allows PO to request backup to HQP’s inbox. HQP would then be able to view request messages with the PO’s id, case, urgency and his/her location.
-*** Justification: POs may not be able to handle a case alone especially when it involves multiple criminals or dangerous scenarios.
+* *Request Command
+* What it does: Allows PO to request backup to HQP’s inbox. HQP would then be able to view request messages with the PO’s id, case, urgency and his/her location.
+* Justification: POs may not be able to handle a case alone especially when it involves multiple criminals or dangerous scenarios.
 He/she would then need backup to take handle the scenario.
-*** 	Highlights: HQP can view the requests with most urgent based on case.
+* 	Highlights: HQP can view the requests with most urgent based on case.
 
-** *Dispatch Command*
-*** What it does: Allows HQP to dispatch backup according to the dispatchers’ requests.
+* *Dispatch Command
+* What it does: Allows HQP to dispatch backup according to the dispatchers’ requests.
 HQP can dispatch other ‘free’ POs to help the POs who requested for backup. PO who requested backup is then given a return message with ETA & Google Maps URL to pinpoint the location of the backup personnel.
 For PO who is being dispatched, he also given an ETA & Google Maps URL to pinpoint the requester.
-*** Justification: After POs request backup, HQP should be able to dispatch backup to help them in their case.
+* Justification: After POs request backup, HQP should be able to dispatch backup to help them in their case.
 Hence, location of the requester and backup officer along with ETA are crucial.
 Location is important, so backup officer knows where to travel to & ETA is crucial so that the requester knows how much time he/she needs to hold off the suspects on his own before backup arrives.
-*** Highlights: ETA is real time with Google Maps Distance API. Location is displayed in a Google Maps URL to allow PO to navigate.
+* Highlights: ETA is real time with Google Maps Distance API. Location is displayed in a Google Maps URL to allow PO to navigate.
 
-* *Minor enhancements*:
+* Minor enhancements:
 ** Able to delete a person from a record without listing beforehand
 
-* *Code contributed*:
+* Code contributed:
 https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=matthew%20alexander&sort=displayName&since=2018-09-12&until=2018-10-30&timeframe=day&reverse=false&repoSort=true[Functional code & Test code]
 
-* *Other contributions*:
+* Other contributions:
 ** Project management:
-*** Guided team for proper coding standards and practices.
-*** Created sequence diagrams for the product's features.
-*** Refactored teammates code that did not follow OOP style.
+* Guided team for proper coding standards and practices.
+* Created sequence diagrams for the product's features.
+* Refactored teammates code that did not follow OOP style.
 
 ** Community:
-*** PRs reviewed (with non-trivial review comments):
+* PRs reviewed (with non-trivial review comments):
 https://github.com/CS2113-AY1819S1-F10-3/main/pull/160[#160],
 https://github.com/CS2113-AY1819S1-F10-3/main/pull/140[#140],
 https://github.com/CS2113-AY1819S1-F10-3/main/pull/94[#94],
@@ -78,14 +77,14 @@ https://github.com/CS2113-AY1819S1-F10-3/main/pull/44[#44],
 https://github.com/CS2113-AY1819S1-F10-3/main/pull/25[#25]
 
 ** Tools:
-*** Integrated a third-party REST API (Google Maps API) to the project.
-*** Integrated a third-party library (HttpClient Apache) to the project as a Http Client to communicate with Google Maps REST API.
-*** Integrated a third-party library (Commons IO) to convert buffer data into String.
-*** Integrated a third-party library (JSON Org) to parse Google Maps API data.
+* Integrated a third-party REST API (Google Maps API) to the project.
+* Integrated a third-party library (HttpClient Apache) to the project as a Http Client to communicate with Google Maps REST API.
+* Integrated a third-party library (Commons IO) to convert buffer data into String.
+* Integrated a third-party library (JSON Org) to parse Google Maps API data.
 
 == Contributions to the User Guide
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
 |===
 
 include::../UserGuide.adoc[tag=edit]
@@ -96,7 +95,7 @@ include::../UserGuide.adoc[tag=dispatch]
 
 == Contributions to the Developer Guide
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.
 |===
 
 include::../DeveloperGuide.adoc[tag=edit]

@@ -38,7 +38,6 @@ public class Inbox {
     }
 
     /**
-     * TODO: Add Javadoc comment
      * @return
      * @throws IOException
      */
@@ -89,17 +88,12 @@ public class Inbox {
         return numUnreadMsgs;
     }
 
-    /**
-     * TODO: Add Javadoc comment
-     */
+
     public static void resetInboxWhenLogout() {
         numUnreadMsgs = -1;
         recordNotifications.clear();
     }
 
-    /**
-     * TODO: Add Javadoc comment
-     */
     public static void clearInboxRecords() {
         numUnreadMsgs = 0;
         recordNotifications.clear();
