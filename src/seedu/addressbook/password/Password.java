@@ -207,7 +207,7 @@ public class Password {
      * Takes the user input and attempts to match with an existing password in the System.
      */
     public static String unlockDevice(String userCommandText, int number) throws IOException {
-        logr.info("Unlocking the system.");
+        logr.fine("Unlocking the system.");
         String result = null;
 
         File originalFile = readerandwriter.fileToUse("passwordStorage.txt");
@@ -228,46 +228,46 @@ public class Password {
                 isHqp = true;
                 result = String.format(MESSAGE_WELCOME, MESSAGE_HQP) + "\n"
                         + MESSAGE_ENTER_COMMAND;
-                logr.info("Logged in as HQP");
+                logr.fine("Logged in as HQP");
                 break;
             } else if (correctPO1(user, storedCurrPassword, hashedEnteredPassword)) {
                 isPO1 = true;
                 result = String.format(MESSAGE_WELCOME, MESSAGE_PO + MESSAGE_ONE) + "\n"
                         + MESSAGE_UNAUTHORIZED + "\n"
                         + MESSAGE_ENTER_COMMAND;
-                logr.info("Logged in as PO1");
+                logr.fine("Logged in as PO1");
                 break;
             } else if (correctPO2(user, storedCurrPassword, hashedEnteredPassword)) {
                 isPO2 = true;
                 result = String.format(MESSAGE_WELCOME, MESSAGE_PO + MESSAGE_TWO) + "\n"
                         + MESSAGE_UNAUTHORIZED + "\n"
                         + MESSAGE_ENTER_COMMAND;
-                logr.info("Logged in as PO2");
+                logr.fine("Logged in as PO2");
                 break;
             } else if (correctPO3(user, storedCurrPassword, hashedEnteredPassword)) {
                 isPO3 = true;
                 result = String.format(MESSAGE_WELCOME, MESSAGE_PO + MESSAGE_THREE) + "\n"
                         + MESSAGE_UNAUTHORIZED + "\n"
                         + MESSAGE_ENTER_COMMAND;
-                logr.info("Logged in as PO3");
+                logr.fine("Logged in as PO3");
                 break;
             } else if (correctPO4(user, storedCurrPassword, hashedEnteredPassword)) {
                 isPO4 = true;
                 result = String.format(MESSAGE_WELCOME, MESSAGE_PO + MESSAGE_FOUR) + "\n"
                         + MESSAGE_UNAUTHORIZED + "\n"
                         + MESSAGE_ENTER_COMMAND;
-                logr.info("Logged in as PO4");
+                logr.fine("Logged in as PO4");
                 break;
             } else if (correctPO5(user, storedCurrPassword, hashedEnteredPassword)) {
                 isPO5 = true;
                 result = String.format(MESSAGE_WELCOME, MESSAGE_PO + MESSAGE_FIVE) + "\n"
                         + MESSAGE_UNAUTHORIZED + "\n"
                         + MESSAGE_ENTER_COMMAND;
-                logr.info("Logged in as PO5");
+                logr.fine("Logged in as PO5");
                 break;
             } else {
                 result = Messages.MESSAGE_ERROR;
-                logr.info("Error in logging in.");
+                logr.severe("Error in logging in.");
             }
             numberOfPasswords--;
         }
@@ -302,10 +302,10 @@ public class Password {
         } else if (wrongPasswordCounter == 0) {
             isShutDown = true;
             result = MESSAGE_SHUTDOWN;
-            logr.info("Shutdown imminent.");
+            logr.warning("Shutdown imminent.");
         } else {
             result = Messages.MESSAGE_ERROR;
-            logr.info("Error in shutdown sequence");
+            logr.severe("Error in shutdown sequence");
         }
         return result;
     }
@@ -379,7 +379,7 @@ public class Password {
      * Begins update password stage 1, tries to match password with existing password.
      */
     public static String updatePassword(String userCommandText, int number) throws Exception {
-        logr.info("Update sequence stage 1 initiated.");
+        logr.fine("Update sequence stage 1 initiated.");
         String result = null;
 
         File originalFile = readerandwriter.fileToUse("passwordStorage.txt");
@@ -404,32 +404,32 @@ public class Password {
                     if (PatrolResourceStatus.HEADQUARTER_PERSONNEL_ID.equals(user)) {
                         isLoginHqp = true;
                         result = MESSAGE_ENTER_NEW_PASSWORD + MESSAGE_HQP + ":";
-                        logr.info("Updating HQP password.");
+                        logr.fine("Updating HQP password.");
 
                     } else if (PatrolResourceStatus.POLICE_OFFICER_1_ID.equals(user)) {
                         isLoginPO1 = true;
                         result = MESSAGE_ENTER_NEW_PASSWORD + MESSAGE_PO + MESSAGE_ONE + ":";
-                        logr.info("Updating PO1 password.");
+                        logr.fine("Updating PO1 password.");
 
                     } else if (PatrolResourceStatus.POLICE_OFFICER_2_ID.equals(user)) {
                         isLoginPO2 = true;
                         result = MESSAGE_ENTER_NEW_PASSWORD + MESSAGE_PO + MESSAGE_TWO + ":";
-                        logr.info("Updating PO2 password.");
+                        logr.fine("Updating PO2 password.");
 
                     } else if (PatrolResourceStatus.POLICE_OFFICER_3_ID.equals(user)) {
                         isLoginPO3 = true;
                         result = MESSAGE_ENTER_NEW_PASSWORD + MESSAGE_PO + MESSAGE_THREE + ":";
-                        logr.info("Updating PO3 password.");
+                        logr.fine("Updating PO3 password.");
 
                     } else if (PatrolResourceStatus.POLICE_OFFICER_4_ID.equals(user)) {
                         isLoginPO4 = true;
                         result = MESSAGE_ENTER_NEW_PASSWORD + MESSAGE_PO + MESSAGE_FOUR + ":";
-                        logr.info("Updating PO4 password.");
+                        logr.fine("Updating PO4 password.");
 
                     } else if (PatrolResourceStatus.POLICE_OFFICER_5_ID.equals(user)) {
                         isLoginPO5 = true;
                         result = MESSAGE_ENTER_NEW_PASSWORD + MESSAGE_PO + MESSAGE_FIVE + ":";
-                        logr.info("Updating PO5 password.");
+                        logr.fine("Updating PO5 password.");
 
                     }
 
@@ -461,7 +461,7 @@ public class Password {
      * Brings update password sequence to stage 2.
      */
     public static String updatePasswordFinal(String userCommandText) throws IOException {
-        logr.info("Update password sequence stage 2 initiated.");
+        logr.fine("Update password sequence stage 2 initiated.");
         String result = null;
         int lineNumber = 0;
         int linesLeft;
@@ -479,32 +479,32 @@ public class Password {
             if (isLoginHqp) {
                 isLoginHqp = false;
                 result = String.format(MESSAGE_UPDATED_PASSWORD, MESSAGE_HQP);
-                logr.info("Updated HQP password.");
+                logr.fine("Updated HQP password.");
             } else if (isLoginPO1) {
                 lineNumber = 1;
                 isLoginPO1 = false;
                 result = String.format(MESSAGE_UPDATED_PASSWORD, MESSAGE_PO + MESSAGE_ONE);
-                logr.info("Updated PO1 password.");
+                logr.fine("Updated PO1 password.");
             } else if (isLoginPO2) {
                 lineNumber = 2;
                 isLoginPO2 = false;
                 result = String.format(MESSAGE_UPDATED_PASSWORD, MESSAGE_PO + MESSAGE_TWO);
-                logr.info("Updated PO2 password.");
+                logr.fine("Updated PO2 password.");
             } else if (isLoginPO3) {
                 lineNumber = 3;
                 isLoginPO3 = false;
                 result = String.format(MESSAGE_UPDATED_PASSWORD, MESSAGE_PO + MESSAGE_THREE);
-                logr.info("Updated PO3 password.");
+                logr.fine("Updated PO3 password.");
             } else if (isLoginPO4) {
                 lineNumber = 4;
                 isLoginPO4 = false;
                 result = String.format(MESSAGE_UPDATED_PASSWORD, MESSAGE_PO + MESSAGE_FOUR);
-                logr.info("Updated PO4 password.");
+                logr.fine("Updated PO4 password.");
             } else if (isLoginPO5) {
                 lineNumber = 5;
                 isLoginPO5 = false;
                 result = String.format(MESSAGE_UPDATED_PASSWORD, MESSAGE_PO + MESSAGE_FIVE);
-                logr.info("Updated PO5 password.");
+                logr.fine("Updated PO5 password.");
             }
             unprepareUpdatePassword();
             notUpdatingFinal();
@@ -526,11 +526,11 @@ public class Password {
 
             if (!originalFile.delete()) {
                 result = (Messages.MESSAGE_ERROR);
-                logr.info("Unable to locate file to delete.");
+                logr.severe("Unable to locate file to delete.");
             }
             if (!tempFile.renameTo(originalFile)) {
                 result = (Messages.MESSAGE_ERROR);
-                logr.info("Unable to locate file to rename.");
+                logr.severe("Unable to locate file to rename.");
             }
             result = result
                     + "\n" + MESSAGE_ENTER_COMMAND;
@@ -538,7 +538,7 @@ public class Password {
             notUpdatingFinal();
             result = MESSAGE_NOT_SAME
                     + "\n" + MESSAGE_TRY_AGAIN;
-            logr.info("Update password stage 2 does not match stage 1.");
+            logr.warning("Update password stage 2 does not match stage 1.");
         }
         pw.close();
         br.close();
@@ -692,7 +692,7 @@ public class Password {
     }
 
     public static String getFullId(String id) {
-        logr.info("Obtained user full ID");
+        logr.fine("Obtained user full ID");
         String result = "Ghost";
         if (PatrolResourceStatus.HEADQUARTER_PERSONNEL_ID.equals(id)) {
             result = MESSAGE_HQP;

@@ -35,7 +35,7 @@ Refer to Quick Start guide to get started.
 The ability to lock anytime also helps to increase security in times of emergencies. Together, the features ensure a secure information-sensitive product.
 ** Highlights: Passwords had to be stored with encryption, and only allows user to enter incorrect passwords 5 times before shutting down.
 
-* *Minor enhancement*: added a lock command that allows any user to lock (log out) the device immediately at any time.
+* *Minor enhancement*: added a logout command that allows any user to log out of the System immediately at any time.
 
 === Code Contributed:
 *	https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=danish[Functional & test code]
@@ -46,14 +46,13 @@ The ability to lock anytime also helps to increase security in times of emergenc
 *** Managed project pre-releases `v1.1` - `v1.2` and project release 'v1.3-1.4' on GitHub
 *** Managed all versions of product, and disseminated almost all issues to team members
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com/CS2113-AY1819S1-F10-3/main/pull/98[#98])
+*** Updated the GUI color scheme and background image (Pull requests https://github.com/CS2113-AY1819S1-F10-3/main/pull/98[#98])
 *** Wrote additional tests for implemented features to increase coverage from 30% to 33% (Pull request https://github.com/CS2113-AY1819S1-F10-3/main/pull/129[#129])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 *** Added use cases and implementation for implemented features in Developer Guide : Pull requests https://github.com/CS2113-AY1819S1-F10-3/main/pull/129[#129] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/23[#23]
 ** Community:
-*** PRs reviewed : https://github.com/CS2113-AY1819S1-F10-3/main/pull/21[#21], https://github.com/CS2113-AY1819S1-F10-3/main/pull/24[#24], https://github.com/CS2113-AY1819S1-F10-3/main/pull/26[#26], https://github.com/CS2113-AY1819S1-F10-3/main/pull/48[#48] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/99[#99] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/108[#108] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/111[#111] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/113[#113] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/117[#117] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/120[#120] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/128[#128] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/138[#138] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/140[#140] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/142[#142] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/161[#161] 
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3]) *todo on friday*
+*** PRs reviewed : https://github.com/CS2113-AY1819S1-F10-3/main/pull/21[#21], https://github.com/CS2113-AY1819S1-F10-3/main/pull/24[#24], https://github.com/CS2113-AY1819S1-F10-3/main/pull/26[#26], https://github.com/CS2113-AY1819S1-F10-3/main/pull/48[#48] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/99[#99] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/108[#108] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/111[#111] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/113[#113] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/117[#117] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/120[#120] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/128[#128] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/138[#138] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/140[#140] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/142[#142] , https://github.com/CS2113-AY1819S1-F10-3/main/pull/161[#161]
 
 == Contributions to the User Guide
 
