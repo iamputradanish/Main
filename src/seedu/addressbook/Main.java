@@ -14,7 +14,7 @@ public class Main extends Application implements Stoppable {
 
     /** Version info of the program. */
 
-    private static final String VERSION = "PRISM - Version 1.3";
+    private static final String VERSION = "PRISM - Version 1.4";
 
 
     @Override
