@@ -2,8 +2,8 @@ package seedu.addressbook.commands;
 
 //@@author muhdharun
 
-import seedu.addressbook.PatrolResourceStatus;
 import seedu.addressbook.common.Messages;
+import seedu.addressbook.common.PatrolResourceStatus;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 /**

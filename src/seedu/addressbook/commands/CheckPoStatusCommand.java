@@ -6,8 +6,9 @@ import java.util.List;
 
 import org.javatuples.Triplet;
 
-import seedu.addressbook.PatrolResourceStatus;
 import seedu.addressbook.common.Location;
+import seedu.addressbook.common.PatrolResourceStatus;
+
 
 /**
  * Returns a list of all POs and their current engagement status

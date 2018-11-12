@@ -76,6 +76,8 @@ This section describes some of the more important details of certain features im
 [[password]]
 === 1a. Password feature
 
+image::Password.PNG[]
+
 *Current Implementation*
 
 This feature provides different access levels of commands to the user, depending on the password entered.
@@ -111,6 +113,7 @@ Step 7: When matched, the userID is returned and a welcome message is displayed 
 ** Cons: More input from user, and difficult to store in an external text file
 
 === 1b. Update Password Feature
+image::updatePassword.png[]
 
 *Current Implementation*
 
@@ -156,7 +159,10 @@ Step 11: The System returns a message that update password is successful.
 
 // end::password[]
 
+// tag::find[]
+[[find]]
 === 2a. "find" command (edited)
+image::FindCommand_Sequence.png[]
 
 *Current Implementation*
 
@@ -164,7 +170,7 @@ The new "find" command is revised from the existing "find" command in AB3. Inste
 It also implements the following operations:
 
 . execute() - executes the "find" command itself and displays the result to the user.
-. getPersonWithNric() - Searches the addressbook to retrieve the person with the specified NRIC.
+. getPersonWithNric() - Searches the Police Records to retrieve the person with the specified NRIC.
 
 The following is an example usage scenario of the "find" command:
 
@@ -178,7 +184,7 @@ Step 4: prepareFind determines string is a valid nric, then instantiates a new F
 
 Step 5: Logic class calls the execute() method on the FindCommand object.
 
-Step 6: The getPersonWithNric() method called in execute() searches the addressbook for the person with "s1234567a" if he exists and person is stored in a list.
+Step 6: The getPersonWithNric() method called in execute() searches the Police Records for the person with "s1234567a" if he exists and person is stored in a list.
 
 Step 7: The person is found and is stored in a matchedPerson list variable. execute() returns a CommandResult using the matchedPerson list as its argument.
 
@@ -197,6 +203,7 @@ Step 8: The CommandResult object displays to the user the searched person and hi
 ** Cons: There could be multiple people with the same name
 
 === 2b. "check" command
+image::CheckCommand_Sequence.png[]
 
 *Current Implementation*
 
@@ -208,7 +215,7 @@ corresponding to the specified NRIC.
 It also implements the following operations:
 
 . execute() - executes the "check" command itself and displays the result to the user.
-. getPersonWithNric() - Searches the addressbook to retrieve the person with the specified NRIC.
+. getPersonWithNric() - Searches the Police Records to retrieve the person with the specified NRIC.
 
 Below is an example of its usage:
 
@@ -238,17 +245,19 @@ Step 7: The list from step 6 gets returned by execute() to create a CommandResul
 * **Alternative 2:** Having a text file for each person, stored in a 'persons' folder
 ** Pros: Each timestamp would then be stored in the respective text file, Retrieving timestamps would be much more efficient
 ** Cons: Space complexity would increase especially if the number of persons increased drastically
+// end::check[]
 
 // tag::edit[]
 [[edit]]
 
 === 2c. "edit" command
 
+image::EditCommand.png[]
 *Current Implementation*
 
 Only a HQP may use this command. This command allows HQP to update their chosen parameters which include the status, offense, postal code
 and wanted attributes of a specific NRIC. It is similar to the "find" command in the sense that
-it searches for the person in the addressBook list by NRIC.
+it searches for the person in the Police Records list by NRIC. At least one parameter must be updated. Offenses are added not replaced.
 
 It also implements these methods:
 
@@ -266,7 +275,7 @@ Step 4: prepareEdit method in Parser class would parse each non-empty input such
         from the input text to instantiate the EditCommand class.
 
 Step 5: Logic class then calls the execute method on EditCommand Object.
-        Person with NRIC "s1234567a" is searched for in the addressbook. If he/she exists,
+        Person with NRIC "s1234567a" is searched for in the Police Records. If he/she exists,
         then the person's attributes get updated accordingly.
 
 Step 6: CommandResult with successful message is returned to Logic class, which then displays
@@ -285,10 +294,50 @@ Step 6: CommandResult with successful message is returned to Logic class, which 
 
 // end::edit[]
 
+// tag::delete[]
+[[delete]]
+=== 2d. "delete" command
+image::DeleteCommand_Sequence.png[]
+
+*Current Implementation*
+
+Only a HQP may use this command. A person's data is allowed to be deleted from the Police Records. It also
+implements the following methods:
+
+. execute() - executes the "delete" command itself and displays the success or error message to the user
+. resultDeletePrediction() - In the event that the user inputs an NRIC that does not exists, this method will check the Police Records and try to return any person with a similar NRIC to what was given by the user
+
+The following is an example usage scenario of the "delete" command:
+
+Step 1: The user(a HQP) input his password and unlocks the system.
+
+Step 2: The user executes "delete s1234567a"
+
+Step 3: Parser class determines the command word and runs prepareDelete method.
+
+Step 4: prepareDelete determines string is a valid nric, then instantiates a new DeleteCommand.
+
+Step 5: Logic class calls the execute() method on the DeleteCommand object.
+
+Step 6: In execute(), the Police Records will be iterated through to see if the person with the said NRIC exists.
+If not, resultDeletePrediction() will be called to check if any person has an NRIC close to the input.
+
+Step 7: Once the person is deleted, a success message will be displayed to the user using a CommandResult object,
+else it would be an error message stating the person with said NRIC does not exist
+
+
+Alternatives considered:
+
+* Delete by name parameter
+** Pros: Much more readable to user to delete a name than an NRIC
+** Cons: There can be more than 1 person with the same name, so deleting should use a more unique parameter
+//end ::delete[]
+
 // tag::wkFeatures[]
 [[wkFeatures]]
 
 === 3a. "showunread" command
+image::inboxCommand.png[]
 
 *Current Implementation*
 
@@ -335,6 +384,7 @@ Inbox command has the same implementation as the "showunread" command - except t
 This is to allow you to access the messages that you have previously marked as read.
 
 === 3c. "read" command
+image::ReadCommand_Sequence.png[]
 
 *Current Implementation*
 
@@ -357,6 +407,7 @@ Step 5: For the messages to be marked as read, the message itself is updated in 
 Step 6: The CommandResult object displays to the user a message indicating that the updating of the read status was successful or not.
 
 === 3d. "clearinbox" command
+image::ClearInboxCommand_Sequence.png[]
 
 *Current Implementation*
 
@@ -382,6 +433,8 @@ Step 2: User executes "clearinbox" command. If command is successfully executed,
 // tag::request[]
 [[request]]
 === 3e. "rb" command
+
+image::RequestCommand.PNG[]
 
 *Current Implementation*
 
@@ -435,6 +488,7 @@ Step 7: CommandResult with successful message is returned to Logic class, which 
 // tag::dispatch[]
 [[dispatch]]
 === 3f. "dispatch" command
+image::DispatchCommand.PNG[]
 
 *Current Implementation*
 
@@ -481,7 +535,14 @@ Step 8: CommandResult with successful message is returned to Logic class, which 
 
 // end::dispatch[]
 
+* Alternatives considered: Chat Client API
+** Pros: Allows real time system with remote access so police officers can view in real time
+** Cons: Chat Client does not store messages after closing application (data does not persist), not much API documentation for beginners
+
+// tag::updatestatus[]
+[[updatestatus]]
 === 4a. "updatestatus" command
+image::UpdateStatus_Sequence.png[]
 
 *Current Implementation*
 
@@ -516,8 +577,12 @@ Step 7: A CommandResult object with the successful message is created to be disp
 * **Alternative 2:** Using a text file to store the statuses of POs
 ** Pros: The statuses are saved even after exiting the system
 ** Cons: Time and space complexity increases especially if there are many POs to manage
+// end::updatestatus[]
 
+// tag::checkstatus[]
+[[checkstatus]]
 === 4b. "checkstatus" command
+image::CheckStatus_Sequence.png[]
 
 *Current Implementation*
 
@@ -547,6 +612,27 @@ Step 6: A CommandResult object is created and displays the list to the user.
 ===== Aspect: How updatestatus command is implemented
 
 * **Alternative :** Similar considerations as updatestatus
+
+=== 4c. "time" command
+
+*Current Implementation*
+
+This command displays the current time to both HQP & PO.
+
+. execute() - executes the "DateTimeCommand" command
+
+The following is an example usage scenario of the "time" command:
+
+Step 1: User inputs password and unlocks the system.
+
+Step 2: User types "time" and executes it.
+
+Step 3: Parser class identifies command as "time" and returns a DateTimeCommand object.
+
+Step 4: Logic class calls the execute() method in the DateTimeCommand object.
+
+Step 5: execute() calls
+
 
 //tag::logout[]
 [[logout]]
@@ -591,6 +677,7 @@ Step 6: A CommandResult object is created and displays a message that the user i
 [[autocorrect]]
 
 === 6. Autocorrection feature
+image::AutoCorrectSequence.png[]
 
 *Current Implementation*
 
@@ -1069,18 +1156,39 @@ Use case ends.
 
 *Extensions*
 
-* 5a. User enters invalid NRIC format
-** 5a1. System shows an error message stating that NRIC has a certain alphanumeric format.
+* 3a. User enters an invalid password.
+** 3a1. System shows an error message.
++
+Use case resumes at step 2.
+
+* 4a. User enters invalid NRIC format
+** 4a1. System shows an error message stating that NRIC has a certain alphanumeric format.
 +
 Use case resumes at step 4.
 
-* 5b. User enters NRIC of a person that does not exist in the police records
-** 5b1. System shows an error message stating that person could not be found.
+* 4b. User enters NRIC of a person that does not exist in the police records
+** 4b1. System shows an error message stating that person could not be found.
 +
 Use case resumes at step 4.
 
-* 5c. User enters edit command with only NRIC tag without other details to change.
-** 5c1. System shows an error message stating that format is invalid
+* 4c. User enters edit command with only NRIC tag without other details to change.
+** 4c1. System shows an error message stating that format is invalid
++
+Use case resumes at step 4.
+
+* 4d. User enters edit command with proper NRIC format and Postal Code that is not 6 digits long.
+** 4d1. System shows an error message stating that Postal Code must be 6 digits long.
++
+Use case resumes at step 4.
+
+* 4e. User enters edit command with proper NRIC and wanted status that is invalid.
+** 4e1. System shows an error message stating that wanted status should be only of 3 types.
++
+Use case resumes at step 4.
+
+* 4f. User enters edit command with proper NRIC and invalid offense.
+** 4f1. System shows an error message stating offense is not in the list.
+** 4f2. System shows list of valid offenses
 +
 Use case resumes at step 4.
 
@@ -1091,7 +1199,8 @@ Use case resumes at step 4.
 // end::edit[]
 
 
-
+// tag::find[]
+[[find]]
 === Use case: Find person
 
 *MSS*
@@ -1128,7 +1237,10 @@ Use case resumes at step 6.
 ** 8a1. System shows an error message.
 +
 Use case ends.
+// end::find[]
 
+// tag::check[]
+[[check]]
 === Use case: Check person
 
 *MSS*
@@ -1170,7 +1282,10 @@ Use case ends.
 ** 6c1. System shows an error message.
 +
 Use case ends.
+// end::check[]
 
+// tag::updatestatus[]
+[[updatestatus]]
 === Use case: Update status of a PO
 
 *MSS*
@@ -1202,7 +1317,10 @@ Use case ends.
 ** 7a1. System shows an error message
 +
 Use case ends.
+// end::updatestatus[]
 
+// tag::checkstatus[]
+[[checkstatus]]
 === Use case: Check status of all POs
 
 *MSS*
@@ -1227,6 +1345,7 @@ Use case ends.
 ** 5a1. System shows an error message
 +
 Use case ends.
+// end::checkstatus[]
 
 //tag::usecase[]
 [[usecase]]
@@ -1475,15 +1594,20 @@ Use case resumes in step 2.
 +
 Use case resumes in step 4.
 
-* 7a. User enters an engaged police officer as backup.
-** 7a1. System shows an error message stating that the police officer entered is engaged.
+* 5b. User enters an engaged police officer as backup.
+** 5b1. System shows an error message stating that the police officer entered is engaged.
 +
 Use case resumes in step 4.
 
-* 7b. User enters an invalid case type.
-** 7b1.  System shows an error message and prompts user with list of offences.
+* 5c. User enters an invalid case type.
+** 5c1.  System shows an error message and prompts user with list of offences.
 +
 Use case resumes at step 4.
+
+* 5d. User enters same officer for backup & requester.
+** 5d1.  System shows an error message stating that backup & requester is same officer.
++
+Use Case resumes at step 4.
 // end:dispatch[]
 
 
@@ -1547,3 +1671,247 @@ A person that is being screened by a PO.
 Refers to the `PRISM` Application itself (i.e. when a user exits the system, he closes the application).
 
 // end::glossary[]
+
+[appendix]
+== Instructions for Manual Testing
+
+Given below are instructions to test the app manually.
+
+[NOTE]
+These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
+
+[NOTE]
+If you want to work with pre-populated data, do not tamper with any of the text files. Should they be tampered accidentally, delete the text file that was tampered and relaunch the jar file to regenerate the text file.
+
+
+=== Launch
+
+. Initial launch
+
+.. Download the jar file and copy into an empty folder
+.. Double-click the jar file +
+   Expected: Shows the GUI with a set of sample persons. The window size may not be optimum. Input "list" command after logging to check if the data is loaded successfully
+.. Resize the window if needed
+
+=== Accounts for both HQP and POs
+
+There are a total of 6 accounts (1 HQP and 5 POs) available in the sample data:
+
+[width="50%",cols="22%,<20%",options="header",]
+|=======================================================================
+|User |Password
+|HQP |papa123
+|PO1 |popo1
+|PO2 |popo2
+|PO3 |popo3
+|PO4 |popo4
+|PO5 |popo5
+|=======================================================================
+
+
+=== Saving Data
+
+. Dealing with missing/corrupted data files
+
+.. As mentioned earlier, if the jar file is run with any of the data files missing, the jar file will auto-generate the required data files with pre-populated data for the purpose of testing.
+
+=== Update password
+
+. Updates password of a user
+
+.. Prerequisites: Logged in as HQP
+.. Test case:
+... Enter existing password to be updated, for e.g: 'popo1'
+... Enter new alphanumeric password (at least 5 characters long) for example 'police1'
+... Enter same password again, i.e 'police1'
+... Expected: Success message shown
+
+=== Viewing Help
+
+. Displays a list of commands available for the current user
+
+.. Prerequisites: Logged in as HQP or PO
+.. Test case: 'help' +
+   Expected: Shows list of available commands
+
+=== Check time
+
+. Shows the current time
+
+.. Prerequisites: Logged in as HQP or PO
+.. Test case: 'time' +
+   Expected: Shows current time
+
+=== Reading notifications from inbox (`showunread` & `inbox`)
+. Prerequisites: Logged in as either HQP or PO.
+. Dealing with missing data files
+.. If data files are missing while the application is running, the application will generate the required data files. However if for some reason that doesn't happen, the command would throw an exception, indicating to the user that data file for user's inbox cannot be found.
+. Reading an inbox with no messages
+.. `showunread` A feedback will be displayed to the user indicating that there are no unread messages.
+.. `inbox` A feedback will be displayed to the user indicating the total number of messages in the inbox, and 0 unread messages.
+
+=== Marking notifications as read
+. Prerequisites: Logged in as either HQP or PO. Inbox must have been opened (use of `inbox` or `showunread` command) as well.
+. Dealing with an unopened inbox
+.. If you have not used `showunread` or `inbox` command, a feedback will be displayed ot user indicating that inbox is not opened yet.
+. Dealing with an unopened inbox after logging out and logging in again
+.. If you open your inbox and log out (`logout`) without exiting the application, you will still need to re-open your inbox before using `read` command. Otherwise, the system will display a feedback that you have not opened your inbox.
+. Dealing with no (unread) messages in inbox
+.. A feedback will be displayed to you indicating that there are no unread messages.
+. Dealing with invalid indices
+.. If you enter a negative number, or a number larger than the number of unread messages, a feedback will be displayed indicating what the valid range of indices are.
+.. If you enter a nonsense value such as a character or symbol, a feedback will be displayed indicating that you have entered the command with an invalid format.
+.. If you enter a positive number for the index that is bigger than the threshold set, a feedback will be displayed indicating that the index entered was too large.
+
+=== Clearing your inbox
+. Dealing with missing data files
+.. If data files are missing while the application is running, the application will generate the required data files. However if for some reason that doesn't happen, the command would throw an exception, indicating to the user that data file for user's inbox cannot be found.
+
+=== Request backup for specific case
+
+. Sends a message to HQP inbox with case, patrol resource ID & location in Google Maps URL
+
+.. Prerequisites: Logged in as HQP or PO
+.. Test case: 'rb gun' +
+   Expected:  Success message will be displayed to the user stating request sent
+.. Test case: 'rb bob' +
+  Expected: Invalid offense message error shwon, valid offenses will be presented in a list
+
+=== Dispatch police officer for specific case to requester
+
+. Sends a message to backup officer & requester with Case, Location & Estimated Time of Arrival
+
+.. Prerequisites: Logged in as HQP only
+.. Test case: 'dispatch po1 riot po3' +
+   Expected: Success message will be displayed to the user stating backup successful
+.. Test case: 'dispatch po1 bob po3' +
+   Expected: Invalid offense message error shown
+.. Test case: 'dispatch po1 gun po3' (po1 engaged already)
+   Expected: Error message shown
+.. Test case: 'dispatch po1 gun po1' +
+   Expected: Error message shown
+.. Test case: 'dispatch bobo gun po1' +
+   Expected: Error message shown
+
+=== Adding a person
+
+. Adds a person to the Police records
+
+.. Prerequisites: Logged in as HQP
+.. Test case: 'add John Doe n/s1234567a d/1996 p/510246 s/wanted w/none o/theft o/drugs +
+   Expected: If wanted, wantedFor parameter cannot be none, error message shown
+.. Test case: 'add John Doe n/s1234567a d/1996 p/510246 s/xc w/none o/theft o/drugs' +
+   Expected: If person is not found, success message will be shown, else, a duplicate person error message will be shown instead
+.. Test case: 'add John Doe s1234567a d/1996 p/510246 s/xc w/none o/theft o/drugs' (or any other missing prefixes) +
+   Expected: Invalid command format, error message is shown
+.. Test case: 'add John Doe n/s123a d/1996 p/510246 s/xc w/none o/theft o/drugs (or any other invalid data)
+   Expected: Error message for invalid data format will be shown
+
+=== List all persons
+
+. Displays a list of all persons
+
+.. PrerequisitesL Logged in as HQP or PO
+.. Test case: 'list' +
+   Expected: List of persons, if any, is shown
+
+=== Finding a person in the Police Records
+
+. Finds a person using the NRIC parameter to see his/her details
+
+.. Prerequisites: Logged in as HQP or PO
+.. Test case: 'find s1234567a' (Assuming person with this NRIC exists) +
+   Expected: Person's details will be displayed
+.. Test case: 'find s1234567a' (If person does not exist in the Police Records) +
+   Expected: Error message stating person not found will be shown
+.. Test case: 'find ' or 'find 11111' +
+   Expected: Invalid command format, error message will be shown
+
+=== Checking a person's screening history
+
+. Check a person's screening history in the form of timestamps
+
+.. Prerequisites: Logged in as HQP
+.. Test case: 'check s1234567a' (Assuming person with this NRIC exists) +
+   Expected: A list of timestamps and the number of times person was screened will be displayed
+.. Test case: 'check s1234567a' (If person does not exist in the Police Records) +
+   Expected: Error message stating person not found will be shown
+.. Test case: 'check ' or 'check 11111' +
+   Expected: Invalid command format, error message will be shown
+
+=== Update a PO's engagement status to free
+
+. Sets the PO's isEngaged boolean value to false (so PO is free for dispatch)
+
+.. Prerequisites: Logged in as HQP
+.. Test case: 'updatestatus po1' (Assuming PO with such ID exists) +
+   Expected: A success message will be shown
+.. Test case: 'updatestatus po20' +
+   Expected: No such PO exists, an error message will be shown
+.. Test case: 'updatestatus ' or 'updatestatus asdf' +
+   Expected: Invalid command format, error message will be shown
+
+=== Check engagement status of all POs
+
+. Displays all the engagement status of all POs in a list
+
+.. Prerequisites: Logged in as HQP or PO
+.. Test case: 'checkstatus' +
+   Expected: List of POs and their engagement statuses
+
+=== Edit a person's details
+
+. Edits the details, only selected parameters, of a person. At least one optional parameter has to be filled
+
+.. Prerequisites: Logged in as HQP
+.. Test case: 'edit n/s1234567a p/111111 s/xc w/none o/theft +
+   Expected: If person exists, success message is shown, else, error message is shown
+.. Test case: 'edit n/s1234567a 111111' (or any missing prefix or parameters) +
+   Expected: Invalid command format, person's details are not edited, error message shown
+
+=== Delete a person
+
+. Deletes a person from the Police Records
+
+.. Prerequisites: Logged in as HQP
+.. Test case: 'Delete s1234567a' (Assuming person with this NRIC exists) +
+   Expected: Success message will be shown
+.. Test case: 'Delete s1234567a' (If person does not exist) +
+   Expected: Person does not exist, error message is shown
+.. Test case: 'Delete ' or 'Delete 1111' +
+   Expected: Invalid command format, error message shown
+
+=== Clear
+
+. Clears the entire Police Records
+
+.. Prerequisites: Logged in as HQP
+.. Test case: 'clear' +
+   Expected: Success message is shown
+=== Logout
+
+. Logout from system so that another password can be entered
+
+.. Prerequisite: Logged in as HQP or PO
+.. Test case: 'logout' +
+   Expected: Startup screen is shown
+
+=== Autocorrect
+
+. Autocorrects an input if the input has a similar spelling to other commands
+
+.. Prerequisites: Logged in as HQP or PO
+.. Test case: 'lost' +
+   Expected: Message stating if you meant 'list'
+.. Test case: 'exit' +
+   Expected: Message stating if you meant 'edit'
+
+=== Shutdown
+
+. Shuts down the system
+
+.. Prerequisites: Logged in as HQP or PO or not at all
+.. Test case: 'shutdown' +
+   Expected: System closes
+
+

@@ -1,6 +1,7 @@
 package seedu.addressbook.parser;
 
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.addressbook.common.Messages.MESSAGE_PO_NOT_FOUND;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -17,7 +18,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.addressbook.PatrolResourceStatus;
 import seedu.addressbook.commands.AddCommand;
 import seedu.addressbook.commands.CheckCommand;
 import seedu.addressbook.commands.CheckPoStatusCommand;
@@ -40,6 +40,7 @@ import seedu.addressbook.commands.ShowUnreadCommand;
 import seedu.addressbook.commands.ShutdownCommand;
 import seedu.addressbook.commands.UpdateStatusCommand;
 import seedu.addressbook.commands.ViewAllCommand;
+import seedu.addressbook.common.PatrolResourceStatus;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Nric;
 import seedu.addressbook.data.person.Offense;
@@ -61,8 +62,6 @@ public class Parser {
                     + " w/(?<wantedFor>[^/]+)"
                     + "(?<pastOffenseArguments>(?: o/[^/]+)*)"); // variable number of offenses
     //@@author
-
-
 
     private static final Pattern PERSON_NRIC_FORMAT = Pattern.compile("(?<nric>[^/]+)");
     private static final String PO_REGEX = "[Pp][Oo][0-9]+";
@@ -346,8 +345,15 @@ public class Parser {
             }
 
             if (userInputParameters[INDEX_EDIT_OFFENSE_TAG] != null) {
+                logger.info("Offense tags are non empty for Edit Command");
                 offenses = getTagsFromArgs(userInputParameters[INDEX_EDIT_OFFENSE_TAG]);
             }
+
+            logger.info("Edit Command parameters: NRIC " + userInputParameters[0]
+                    + "Postal Code: " + userInputParameters[1]
+                    + "Status: " + userInputParameters[2]
+                    + "Wanted: " + userInputParameters[3]
+                    + "Offense(s) " + offenseString);
 
             return new EditCommand(
                     userInputParameters[0],
@@ -358,7 +364,7 @@ public class Parser {
             );
 
         } catch (IllegalValueException ive) {
-            logger.log(Level.WARNING, "Invalid edit command format.", ive);
+            logger.log(Level.WARNING, "Invalid Edit Command format.", ive);
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -509,8 +515,10 @@ public class Parser {
                 + PatrolResourceStatus.getLocation(Password.getId()).getGoogleMapsUrl();
 
         try {
+            logger.info(String.format("Backup officer %s is handling case %s", Password.getId(), caseName));
             return new RequestHelpCommand(caseName, message);
         } catch (IllegalValueException ive) {
+            logger.warning(String.format("Offense %s is invalid", caseName));
             return new IncorrectCommand(Offense.MESSAGE_OFFENSE_INVALID + Offense.getListOfValidOffences());
         }
     }
@@ -529,6 +537,7 @@ public class Parser {
         String[] argParts = args.trim().split("\\s+", 3);
 
         if (argParts.length < 3) {
+            logger.warning("Prepare Dispatch format is wrong");
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DispatchCommand.MESSAGE_USAGE));
         }
@@ -536,17 +545,24 @@ public class Parser {
         backupOfficer = argParts[0].toLowerCase();
         caseName = argParts[1].toLowerCase();
         dispatchRequester = argParts[2].toLowerCase();
-
+        if (args.matches(PO_REGEX)) {
+            return new UpdateStatusCommand(args);
+        }
         try {
+            if (!backupOfficer.matches(PO_REGEX) || !dispatchRequester.matches(PO_REGEX)) {
+                throw new IllegalValueException(MESSAGE_PO_NOT_FOUND);
+            }
             if (backupOfficer.equalsIgnoreCase(dispatchRequester)) {
+                logger.warning("Backup officer same as Dispatch requester");
                 throw new IllegalValueException(String.format(DispatchCommand.getMessageBackupDispatchSame(),
                         backupOfficer));
             }
+            logger.info(String.format("%s officer backups to %s requester", backupOfficer, dispatchRequester));
             return new DispatchCommand(backupOfficer, dispatchRequester, caseName);
         } catch (IllegalValueException ive) {
+            logger.warning("Dispatch Command Invalid " + ive.getMessage());
             return new IncorrectCommand(ive.getMessage());
         }
-
 
     }
 

@@ -25,7 +25,7 @@
 package seedu.addressbook.commands;
 
 import org.javatuples.Pair;
-import seedu.addressbook.PatrolResourceStatus;
+import seedu.addressbook.common.PatrolResourceStatus;
 import seedu.addressbook.common.Location;
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -168,7 +168,7 @@ public class EditCommand extends Command {
 ``` java
 package seedu.addressbook.commands;
 
-import seedu.addressbook.PatrolResourceStatus;
+import seedu.addressbook.common.PatrolResourceStatus;
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Offense;
@@ -217,7 +217,7 @@ public class RequestHelp extends Command {
 ``` java
 package seedu.addressbook.commands;
 
-import seedu.addressbook.PatrolResourceStatus;
+import seedu.addressbook.common.PatrolResourceStatus;
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Offense;

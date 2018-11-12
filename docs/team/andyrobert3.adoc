@@ -1,11 +1,27 @@
 = Matthew Alexander - Project Portfolio
 
-:site-section: AboutUs
+:site-section: ProjectPortfolio
+:toc:
+:toc-title:
+:imagesDir: ../images
 :stylesDir: ../stylesheets
+:xrefstyle: full
 
-== PROJECT: Police Records and Intelligent System (PRISM)
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:warning-caption: :warning:
+:experimental:
+
+== PROJECT: Police Records Intelligent System (PRISM)
 
 ---
+== Introduction
+This portfolio was written to showcase my abilities to contribute to the project from a technical perspective
+such as features & code, notwithstanding communication abilities that include documentation of the code.
+The project is centered on building a "Police Records Intelligent System" (PRISM) that was done in CS2113T (Software Engineering & Object Oriented Programming)
+at the National University of Singapore in Semester 1 of the 2018/2019 Academic year.
+It was a team based effort that included (me) Matthew Alexander, Putra Danish, Muhammad Harun, Ong Wee Keong & Shreyas.
+
 
 == Overview
 
@@ -43,7 +59,7 @@ Location is important, so backup officer knows where to travel to & ETA is cruci
 ** Able to delete a person from a record without listing beforehand
 
 * *Code contributed*:
-[https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}
+https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=matthew%20alexander&sort=displayName&since=2018-09-12&until=2018-10-30&timeframe=day&reverse=false&repoSort=true[Functional code & Test code]
 
 * *Other contributions*:
 ** Project management:

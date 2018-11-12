@@ -1,12 +1,10 @@
 //@@author andyrobert3
-package seedu.addressbook;
+package seedu.addressbook.common;
 
 import java.util.ArrayList;
 
 import org.javatuples.Triplet;
 
-import seedu.addressbook.common.Location;
-import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
@@ -37,7 +35,7 @@ public class PatrolResourceStatus {
     }
 
     /**
-     * TODO: Add Javadoc comment
+     * Sets all Police Officers to be free & HQP to be engaged
      */
     public static void resetPatrolResourceStatus() {
         int index = 0;
@@ -72,24 +70,8 @@ public class PatrolResourceStatus {
         }
     }
 
-    // TODO: remove this duplicate code
     public static Location getLocation(String patrolResource) {
-        switch (patrolResource) {
-        case "hqp":
-            return patrolResourceStatus.get(0).getValue1();
-        case "po1":
-            return patrolResourceStatus.get(1).getValue1();
-        case "po2":
-            return patrolResourceStatus.get(2).getValue1();
-        case "po3":
-            return patrolResourceStatus.get(3).getValue1();
-        case "po4":
-            return patrolResourceStatus.get(4).getValue1();
-        case "po5":
-            return patrolResourceStatus.get(5).getValue1();
-        default:
-            return patrolResourceStatus.get(0).getValue1(); // default for test cases
-        }
+        return getPatrolResource(patrolResource).getValue1();
     }
 
     /**

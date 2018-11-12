@@ -44,7 +44,7 @@ public class CheckCommand extends Command {
 ###### \seedu\addressbook\commands\CheckPOStatusCommand.java
 ``` java
 import org.javatuples.Triplet;
-import seedu.addressbook.PatrolResourceStatus;
+import seedu.addressbook.common.PatrolResourceStatus;
 import seedu.addressbook.common.Location;
 
 import java.util.ArrayList;
@@ -212,7 +212,7 @@ public class CheckPOStatusCommand extends Command {
 ###### \seedu\addressbook\commands\UpdateStatusCommand.java
 ``` java
 
-import seedu.addressbook.PatrolResourceStatus;
+import seedu.addressbook.common.PatrolResourceStatus;
 
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 

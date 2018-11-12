@@ -37,10 +37,6 @@ public class ReadCommand extends Command {
         Parser.setupLoggerForAll(logger);
     }
 
-    /**
-     * TODO: Add Javadoc comment
-     * @return
-     */
     @Override
     public CommandResult execute() {
         setupLogger();

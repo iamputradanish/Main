@@ -3,8 +3,8 @@ package seedu.addressbook.commands;
 
 import java.io.IOException;
 
-import seedu.addressbook.PatrolResourceStatus;
 import seedu.addressbook.common.Messages;
+import seedu.addressbook.common.PatrolResourceStatus;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Offense;
 import seedu.addressbook.inbox.MessageFilePaths;
