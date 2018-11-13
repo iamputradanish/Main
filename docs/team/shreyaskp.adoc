@@ -1,6 +1,17 @@
 = Shreyas Kuthanoor Prakash - Project Portfolio
+:site-section: ProjectPortfolio
+:toc:
+:toc-title:
+:sectnums:
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+:xrefstyle: full
 
-== PROJECT: Police Records and Intelligence System (PRISM)
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:warning-caption: :warning:
+:experimental:
+= PROJECT: Police Records and Intelligence System (PRISM)
 
 ---
 
@@ -10,11 +21,7 @@ This document serves to showcase my contributions towards the CS2113T Software E
 My team and I have built PRISM using AddressBook - Level 3, provided by the se-edu team as a base.
 
 The Police Records and Intelligence System (PRISM) is a desktop application catered towards the needs of the Police. The System
-has two types of users- Police Officers and Headquarters Personnel, each with different levels of access. As a Police
-Officer on patrol, you can screen someone using the system. You can then choose a course of action based on the status
-and criminal history of the subject screened. On the other hand, as a Headquarters Personnel, you can not only perform all
-actions that can be performed by a Police Officer, but also perform additional functionalities such as adding, removing and
-editing subjects currently present in the database, and dispatching other Police Officers, when need be. Both types of users
+has two types of users- Police Officers and Headquarters Personnel, each with different levels of access. Both types of users
 interact with the System using a CLI (Command-Line Interface). The application is written in Java, and it has a minimalistic
 GUI (Graphical User Interface) created with JavaFX.
 
@@ -35,12 +42,13 @@ Thus, the AutoCorrect feature is extremely useful in cases where minute errors a
 
 * *Minor enhancement*: The user can view the current local time and date using the time command. This is useful especially for providing backup as well as meeting deadlines.
 
-* *Code contributed*: [https://github.com/CS2113-AY1819S1-F10-3/main/blob/master/collated/functional/ShreyasKp.md[Functional code]] https://github.com/CS2113-AY1819S1-F10-3/main/blob/master/collated/test/ShreyasKp.md[Test code]]
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=shreyaskp&sort=displayName&since=2018-09-12&until=2018-10-30&timeframe=day&reverse=false&repoSort=true[Functional & Test code]
 
 * *Other contributions*:
 
 ** Project management:
 *** Ensured team maintains code quality, according to the https://oss-generic.github.io/process/codingStandards/CodingStandard-Java.html[Java Coding Standard]
+*** Added implementation of CheckStyle plugin to fix code quality bugs: https://github.com/CS2113-AY1819S1-F10-3/main/pull/235[#235], https://github.com/CS2113-AY1819S1-F10-3/main/pull/242[#242]
 ** Documentation:
 *** Added user stories relevant to our project in the Developer Guide: https://github.com/CS2113-AY1819S1-F10-3/main/pull/4[#4]
 *** Added use cases for features implemented in the Developer Guide: https://github.com/CS2113-AY1819S1-F10-3/main/pull/111[#111]

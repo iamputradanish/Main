@@ -1,13 +1,15 @@
 //@@author ShreyasKp
 package seedu.addressbook.commands;
+import static seedu.addressbook.parser.Parser.setupLoggerForAll;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.storage.StorageFile;
-
 
 
 /**
@@ -16,15 +18,20 @@ import seedu.addressbook.storage.StorageFile;
 public class Dictionary extends Command {
     private static final ArrayList<String> COMMANDS = new ArrayList<>();
 
+    private static final Logger logger = Logger.getLogger(Dictionary.class.getName());
+
     private ArrayList<String> details = new ArrayList<>();
     private AddressBook addressBook;
 
     public Dictionary() {
+        setupLogger();
         try {
             StorageFile storage = new StorageFile();
             this.addressBook = storage.load();
+            logger.log(Level.INFO, "Accessed addressbook succesfully");
         } catch (Exception e) {
             //This constructor is only used to access the addressbook, and thus will never throw an exception
+            logger.severe("Couldn't load addressbook");
         } finally {
             COMMANDS.add(AddCommand.COMMAND_WORD);
             COMMANDS.add(CheckCommand.COMMAND_WORD);
@@ -47,6 +54,10 @@ public class Dictionary extends Command {
             COMMANDS.add(UpdateStatusCommand.COMMAND_WORD);
             COMMANDS.add(ViewAllCommand.COMMAND_WORD);
         }
+    }
+
+    private void setupLogger() {
+        setupLoggerForAll(logger);
     }
 
     String getErrorMessage() {

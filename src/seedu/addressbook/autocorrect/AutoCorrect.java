@@ -3,6 +3,8 @@ package seedu.addressbook.autocorrect;
 
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.logging.Logger;
+
 import seedu.addressbook.commands.AddCommand;
 import seedu.addressbook.commands.CheckCommand;
 import seedu.addressbook.commands.CheckPoStatusCommand;
@@ -25,12 +27,15 @@ import seedu.addressbook.commands.ShowUnreadCommand;
 import seedu.addressbook.commands.ShutdownCommand;
 import seedu.addressbook.commands.UpdateStatusCommand;
 import seedu.addressbook.commands.ViewAllCommand;
+import seedu.addressbook.parser.Parser;
 import seedu.addressbook.password.Password;
+
 
 /**
  * Checks if the invalid command has a prediction and returns the valid format for using the command
  */
 public class AutoCorrect {
+    private static final Logger logger = Logger.getLogger(AutoCorrect.class.getName());
 
     private CheckDistance checker = new CheckDistance();
 
@@ -42,6 +47,7 @@ public class AutoCorrect {
      * @return The command
      */
     public static String getCommand(String userInput) {
+        setupLogger();
         String[] arr = userInput.split(" ", 2);
         return arr[0];
     }
@@ -56,7 +62,12 @@ public class AutoCorrect {
         }
     }
 
+    private static void setupLogger() {
+        Parser.setupLoggerForAll(logger);
+    }
+
     public String getResultOfInvalidCommand(String userInput) {
+        setupLogger();
         boolean isHqpFlag = Password.isHqpUser();
         String command = checkCommand(userInput, isHqpFlag);
         String output = checker.checkDistance(userInput);

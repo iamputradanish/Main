@@ -942,9 +942,10 @@ To run tests for the project, complete the step below.
 
 // tag::stories[]
 
+[[stories]]
+
 [appendix]
 
-[[stories]]
 == User Stories
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
@@ -965,8 +966,10 @@ HQP- Headquarters Personnel
 |`*` |PO |know the serial number and battery level |to return it to HQ and charge it when necessary
 |===========================================================================================================================================
 
-// end::stories[]
 [appendix]
+
+// end::stories[]
+
 == Use Cases
 
 (For all use cases below, the *System* is the `Police Records` and the *User* is either the `Police Officer (PO)' or 'Headquarters Personnel (HQP)', unless specified otherwise)

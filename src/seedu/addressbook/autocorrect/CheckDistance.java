@@ -2,13 +2,18 @@
 package seedu.addressbook.autocorrect;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.addressbook.commands.Dictionary;
+import seedu.addressbook.parser.Parser;
 
 /**
  * Checks the number of single character changes required to convert one string to another.
  */
 public class CheckDistance {
+
+    private static final Logger logger = Logger.getLogger(CheckDistance.class.getName());
 
     private Dictionary dictionary = new Dictionary();
 
@@ -18,12 +23,19 @@ public class CheckDistance {
 
     private String prediction = "none";
 
+    private static void setupLogger() {
+        Parser.setupLoggerForAll(logger);
+    }
+
     /**
      * Checks distance for invalid commands
      * @param commandInput The invalid input command
      * @return The prediction if found
      */
     public String checkDistance(String commandInput) {
+        setupLogger();
+        logger.log(Level.INFO, "Checking distance of input command from valid inputs");
+
         int distance;
         for (String command : commandsList) {
             distance = EditDistance.computeDistance(commandInput, command);
@@ -42,6 +54,8 @@ public class CheckDistance {
      * @return The prediction if found
      */
     public String checkInputDistance(String input) {
+        logger.log(Level.INFO, "Checking distance of inputted NRIC from existing NRICs");
+
         int distance;
         for (String nric : detailsList) {
             distance = EditDistance.computeDistance(input, nric);
